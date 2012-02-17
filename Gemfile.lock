@@ -8,6 +8,7 @@ PATH
   remote: .
   specs:
     beluga_ipc (0.1.0)
+      daemons
 
 GEM
   specs:

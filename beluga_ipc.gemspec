@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.summary = %q{IPC server for the Beluga project}
   s.test_files = `git ls-files spec examples`.split("\n")
 
+  s.add_dependency "daemons"
   # eventually add this back in
   #s.add_dependency "rhubarb"
 
