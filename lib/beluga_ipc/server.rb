@@ -8,6 +8,7 @@ module BelugaIPC
     # this function is useful to set initial data values and is
     # especially useful in testing
     def self.reset_data
+      @@client_id = 0
       @@positions = [[0.0, 0.0, 0.0]]*@@num_bots
       @@controls = ({ :waypoint =>  [[0.0, 0.0, 0.0]]*@@num_bots,
                       :kinematics => [[0.0, 0.0, 0.0]]*@@num_bots })
