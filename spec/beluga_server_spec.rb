@@ -1,13 +1,18 @@
 require 'spec_helper'
 
 describe BelugaIPC::Server do
+  before(:all) do
+    if BelugaIPC::Manager.running?
+      raise "Beluga IPC server appears to already be running.  Either stop it or wait before running tests."
+    end
+  end
 
   before(:each) do
     BelugaIPC::Server.reset_data
     @server = BelugaIPC::Server.new(1234, '127.0.0.1')
     @server.start
 
-    @sock = TCPSocket.open('127.0.0.1', 1234)
+    @sock = TCPSocket.new('127.0.0.1', 1234)
     @welcome = @sock.gets
   end
 
