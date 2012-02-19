@@ -25,11 +25,15 @@ case ARGV[0]
   when "pid"
     puts BelugaIPC::Manager.pid
   when "status"
-    pid = BelugaIPC::Manager.pid
-    if pid > 0
-      puts "Beluga server appears to be running on port 1234 with PID #{pid}"
+    if BelugaIPC::Manager.running?
+      pid = BelugaIPC::Manager.pid
+      if pid > 0
+        puts "Beluga server appears to be running on port 1234 with PID #{pid}"
+      else
+        puts "Beluga server appears to be running on port 1234, but the PID could not be determined"
+      end
     else
-      puts "Beluga server not running on port 1234"
+      puts "Beluga server does not appear to be running on port 1234, nor does any other program"
     end
   else
     puts usage
