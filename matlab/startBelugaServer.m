@@ -9,23 +9,19 @@ function success = startBelugaServer(logfile)
 
 if nargin == 0,
     logfile = 'beluga_server.log';
+else
+    warning('Beluga:LogWarning', 'Beluga log file support is temporarily disabled (you should still be able to find a beluga_ipc.log file somewhere near this file)');
 end
 
 pid = isBelugaServerRunning();
 if pid > 0,
-    error('Beluga IPC server is already running as process with PID %s', pid)
+    error('Beluga IPC server is already running as process with PID %d', pid)
     success = 0;
     return
 end
 
-server_path = fullfile(fileparts(mfilename('fullpath')), '../beluga_server.rb');
-
-cmd = '';
-if ispc
-    cmd = sprintf('start "beluag_server" ruby %s >> %s 2>&1', server_path, logfile);
-else
-    cmd = sprintf('ruby "%s" >> "%s" 2>&1 &', server_path, logfile);
-end
+beluga_daemon_path = fullfile(fileparts(mfilename('fullpath')), '../bin/beluga_daemon');
+cmd = sprintf('%s start', beluga_daemon_path);
 
 fprintf('cmd = |%s|\n', cmd);
 %return

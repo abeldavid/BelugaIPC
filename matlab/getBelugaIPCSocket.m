@@ -20,7 +20,7 @@ if ~strcmp(sock.Status, 'open')
 end
 
 r = '';
-expected_response = 'Welcome to BelugaServer, client ';
+expected_response = 'Welcome to Beluga IPC Server, client ';
 
 for tries = 1 : 20,
     if sock.BytesAvailable > 0
