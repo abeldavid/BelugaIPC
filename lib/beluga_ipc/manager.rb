@@ -67,7 +67,7 @@ module BelugaIPC
     end
 
     def self.pid_on_pc
-      s = `netstat -anop TCP`.split.find_all{|l| l =~ /:1234/ && l =~ /LISTENING/}.first
+      s = `netstat -anop TCP`.split("\n").find_all{|l| l =~ /:1234/ && l =~ /LISTENING/}.first
       s.nil? ? 0 : s.rpartition("\s").last.to_i
     end
 
@@ -91,7 +91,7 @@ module BelugaIPC
     end
 
     def self.start_on_pc
-      `start "beluga_server" ruby -e "require 'beluga_ipc'; BelugaIPC::Manager.launch; BelugaIPC::Manager.join" >> "beluga_ipc.log" 2>&1`
+      exec(%q{start "beluga_server" ruby -e "require 'beluga_ipc'; puts 'starting beluga server'; BelugaIPC::Manager.launch; puts 'running'; BelugaIPC::Manager.join; puts 'done'" >> "beluga_ipc.log" 2>&1})
     end
 
     def self.start_on_posix

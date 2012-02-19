@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require File.join(File.dirname(__FILE__), '../lib/beluga_ipc')
+require File.expand_path(File.join(File.dirname(__FILE__), '../lib/beluga_ipc'))
 
 #BelugaIPC::Manager.launch
 #BelugaIPC::Manager.join
