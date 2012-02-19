@@ -45,19 +45,30 @@ module BelugaIPC
     end
 
     def self.running?
-      pid > 0
+      begin
+        s = TCPSocket.new('127.0.0.1',1234)
+        s.gets
+        s.puts "Ping"
+        ok = (s.gets =~ /pong/i)
+        s.close
+        return ok
+      rescue
+        false
+      end
     end
 
     def self.kill
-      p = pid
-      return if p == 0
-      s = TCPSocket.new('127.0.0.1', 1234)
-      s.gets
-      s.puts("S")
-      s.close
-      p = pid
-      return if p == 0
-      hard_kill(p)
+      begin
+        s = TCPSocket.new('127.0.0.1', 1234)
+        s.gets
+        s.puts("S")
+        s.gets
+        s.close
+      ensure
+        p = pid
+        return if p == 0
+        hard_kill(p)
+      end
     end
 
     private
