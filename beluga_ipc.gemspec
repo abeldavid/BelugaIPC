@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.date = Time.now.utc.strftime("%Y-%m-%d")
   s.email = %q{dan.t.swain@gmail.com}
   s.files = FileList['lib/**/*.rb', 'bin/*', '[A-Za-z]*',
-                     'test/**/*', 'matlab/*', 'simulator/*',
+                     'spec/**/*', 'matlab/*', 'simulator/*',
                      'clients/*'].to_a
   s.executables = Dir.glob("bin/*").map{ |f| File.basename(f) }
   s.homepage = %q{http://github.com/leonard-lab/BelugaIPC}
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.8.11}
   s.summary = %q{IPC server for the Beluga project}
-  s.test_files = `git ls-files spec examples`.split("\n")
+  s.test_files = FileList['spec/**/*'].to_a
 
   # eventually add this back in
   #s.add_dependency "rhubarb"
