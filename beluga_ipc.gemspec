@@ -1,4 +1,5 @@
 require File.expand_path('lib/beluga_ipc/version', File.dirname(__FILE__))
+require 'rake'
 
 Gem::Specification.new do |s|
   s.name = %q{beluga_ipc}
@@ -6,7 +7,9 @@ Gem::Specification.new do |s|
   s.authors = ["Dan Swain"]
   s.date = Time.now.utc.strftime("%Y-%m-%d")
   s.email = %q{dan.t.swain@gmail.com}
-  s.files = `git ls-files`.split("\n")
+  s.files = FileList['lib/**/*.rb', 'bin/*', '[A-Za-z]*',
+                     'test/**/*', 'matlab/*', 'simulator/*',
+                     'clients/*'].to_a
   s.executables = Dir.glob("bin/*").map{ |f| File.basename(f) }
   s.homepage = %q{http://github.com/leonard-lab/BelugaIPC}
   s.rdoc_options = ["--charset=UTF-8"]
