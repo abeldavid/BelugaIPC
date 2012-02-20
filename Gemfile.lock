@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dantswain/rhubarb.git
-  revision: edc5274c1112b5c7c17e213de05e5e96da4f6dd3
+  revision: a5c29be1a37bcc3e420c5fe68428662761807c7a
   specs:
     rhubarb (0.1.0)
 
