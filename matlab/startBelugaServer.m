@@ -22,6 +22,10 @@ end
 
 beluga_daemon_path = fullfile(fileparts(mfilename('fullpath')), '../bin/beluga_daemon');
 cmd = sprintf('%s start', beluga_daemon_path);
+if ispc
+    % on windows, the script won't run unless we say it's a ruby file
+    cmd = sprintf('ruby %s', cmd);
+end
 
 fprintf('cmd = |%s|\n', cmd);
 %return
