@@ -15,33 +15,35 @@ end
 
 pid = isBelugaServerRunning();
 if pid > 0,
-    error('Beluga IPC server is already running as process with PID %d', pid)
-    success = 0;
+    printf('Beluga IPC server is already running as process with PID %d\n', pid)
+    success = 1;
     return
+else
+    beluga_daemon_path = fullfile(fileparts(mfilename('fullpath')), '../bin/beluga_daemon');
+    cmd = sprintf('\"%s\" start', beluga_daemon_path);
+    if ispc
+        % on windows, the script won't run unless we say it's a ruby file
+        cmd = sprintf('ruby %s', cmd);
+    end
+
+    fprintf('cmd = |%s|\n', cmd);
+    %return
+
+    [status, r] = system(cmd);
+    if status > 0,
+        error(r)
+        success = 0;
+        return
+    end
+
+    disp('Server launched, checking connection...')
 end
 
-beluga_daemon_path = fullfile(fileparts(mfilename('fullpath')), '../bin/beluga_daemon');
-cmd = sprintf('%s start', beluga_daemon_path);
-if ispc
-    % on windows, the script won't run unless we say it's a ruby file
-    cmd = sprintf('ruby %s', cmd);
-end
-
-fprintf('cmd = |%s|\n', cmd);
-%return
-
-[status, r] = system(cmd);
-if status > 0,
-    error(r)
-    success = 0;
-    return
-end
-
-disp('Server launched, checking connection...')
 pause(1)
 
 sock = getBelugaIPCSocket('127.0.0.1', 1234);
 resp = belugaIPCMessage('ping', sock);
+fclose(sock);
 
 if ~strcmp(resp, 'PONG!')
     error('Failure to confirm server launch [got %s].', resp)
