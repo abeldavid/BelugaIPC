@@ -3,7 +3,7 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name = %q{beluga_ipc}
-  s.version = BelugaIPC::Version::STRING
+  s.version = BelugaIPC::VERSION
   s.authors = ["Dan Swain"]
   s.date = Time.now.utc.strftime("%Y-%m-%d")
   s.email = %q{dan.t.swain@gmail.com}
