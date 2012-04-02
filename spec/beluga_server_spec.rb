@@ -146,6 +146,23 @@ describe BelugaIPC::Server do
     
   end
 
+  describe "params" do
+    it "should respond with an error unless params have been set" do
+      response_to("get params").should match "ERR"
+    end
+    
+    it "should set the params string" do
+      param_string = "params is just a string"
+      response_to("set params \"#{param_string}\"").should match param_string
+    end
+    
+    it "should get the params string" do
+      param_string = "params is just a string"
+      response_to("set params \"#{param_string}\"").should match "params"
+      response_to("get params").should match param_string
+    end
+  end
+
   after(:each) do
     @sock.puts "S"
     @sock.gets

@@ -13,6 +13,7 @@ module BelugaIPC
       @@controls = ({ :waypoint =>  [[0.0, 0.0, 0.0]]*@@num_bots,
                       :kinematics => [[0.0, 0.0, 0.0]]*@@num_bots })
       @@control_mode = :waypoint
+      @@params = "ERROR PARAMS NOT SET"
     end
 
     # makes sure the data is reset when we launch a server
@@ -64,6 +65,17 @@ module BelugaIPC
 
     def welcomeMessage(args)
       "Welcome to Beluga IPC Server, client #{@@client_id}."
+    end
+
+    add_get_set_command :name => "params"
+    
+    def getParams args, cmd_def
+      @@params
+    end
+
+    def setParams args, cmd_def
+      @@params = args[2]
+      getParams(args, cmd_def)
     end
 
   end
