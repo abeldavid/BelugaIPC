@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require File.expand_path(File.join(File.dirname(__FILE__), '../lib/beluga_ipc'))
+require "rubygems"
+require "bundler/setup"
 
-#BelugaIPC::Manager.launch
-#BelugaIPC::Manager.join
+require "beluga_ipc"
 
 usage = <<-EOS
 beluga_daemon command
