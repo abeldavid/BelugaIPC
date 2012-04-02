@@ -155,6 +155,17 @@ try
     disp('checking set kinematics [0 1 2 3]')
     check_set_kinematics_response([0 : 3], randn(4,1), randn(4,1), randn(4,1), sock);    
     
+    disp('checking get params (unset)')
+    check_get_params_response('ERROR', sock);
+    
+    disp('checking set params')
+    check_set_params_response('foo bar baz', sock);
+    
+    disp('checking get params')
+    check_get_params_response('foo bar baz', sock);
+    
+    disp('done tests, stopping server')
+    
     stopBelugaServer
     
 catch err
@@ -262,6 +273,22 @@ if ~iseqwf(s(:), s_ex(:)) || ~iseqwf(o(:), o_ex(:)) || ~iseqwf(zd(:), zd_ex(:)) 
 end
 
 check_get_kinematics_response(id, s_ex, o_ex, zd_ex, sock);
+
+function check_get_params_response(p_ex, sock)
+
+p = belugaGetParamsIPC(sock);
+
+if ~strncmp(p, p_ex, min(length(p), length(p_ex)))
+    error('Unexpected response from server in check_get_params_response.  Expected "%s", got "%s"', p_ex, p);
+end
+
+function check_set_params_response(p_ex, sock)
+
+p = belugaSetParamsIPC(p_ex, sock);
+if ~strncmp(p, p_ex, min(length(p), length(p_ex)))
+    error('Unexpected response from server in check_set_params_response.  Expected "%s", got "%s"', p_ex, p);
+end
+check_get_params_response(p_ex, sock);
 
 function dump_vecs(varargin)
 
