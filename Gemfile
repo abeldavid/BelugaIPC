@@ -1,3 +1,3 @@
 gemspec
 
-gem "rhubarb", :git => "git://github.com/dantswain/rhubarb.git"
+gem "rhubarb", "0.1.1", :git => "git://github.com/dantswain/rhubarb.git"

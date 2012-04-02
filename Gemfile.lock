@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/dantswain/rhubarb.git
-  revision: a5c29be1a37bcc3e420c5fe68428662761807c7a
+  revision: d38ad2c71dfd2b900951592597585c43ad79feb9
   specs:
-    rhubarb (0.1.0)
+    rhubarb (0.1.1)
 
 PATH
   remote: .
@@ -27,5 +27,5 @@ PLATFORMS
 
 DEPENDENCIES
   beluga_ipc!
-  rhubarb!
+  rhubarb (= 0.1.1)!
   rspec
