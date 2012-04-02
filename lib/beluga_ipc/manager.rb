@@ -13,7 +13,7 @@ module BelugaIPC
       @server.join unless @server.nil?
     end
 
-    def self.launch_and_wait opts
+    def self.launch_and_wait opts = Hash.new
       launch opts
       join
     end

@@ -9,6 +9,7 @@ usage = <<-EOS
 beluga_daemon command
   commands:
     start
+    run
     stop
     restart
     status
@@ -20,6 +21,8 @@ case ARGV[0]
     BelugaIPC::Manager.start
   when "stop"
     BelugaIPC::Manager.kill
+  when "run"
+    BelugaIPC::Manager.launch_and_wait
   when "restart"
     BelugaIPC::Manager.restart
   when "pid"
