@@ -1,6 +1,5 @@
-require "rubygems"
-require "bundler/setup"
-
-require "beluga_ipc/server"
-require "beluga_ipc/manager"
-require "beluga_ipc/version"
+module BelugaIPC
+  autoload :Server, 'beluga_ipc/server'
+  autoload :Manager, 'beluga_ipc/manager'
+  autoload :VERSION, 'beluga_ipc/version'
+end
