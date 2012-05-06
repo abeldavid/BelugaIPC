@@ -2,8 +2,8 @@ module BelugaIPC
   # TODO: The port should be configurable
   class Manager
     def self.launch opts = Hash.new
-      opts = {:port => 1234, :host => '127.0.0.1'}.merge(opts)
-      @server = BelugaIPC::Server.new(opts[:port], opts[:host])
+      opts = {:port => 1234, :host => '127.0.0.1', :maxConnections => 8}.merge(opts)
+      @server = BelugaIPC::Server.new(opts[:port], opts[:host], opts[:maxConnections])
       @server.audit if opts[:audit]
       @server.start unless opts[:no_start]
       @server
